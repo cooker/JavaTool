@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class BaseEntityConvert<A, B> {
+public class BaseEntityConvert<A, B> implements IEntityPackage<A, B> {
     private final Function<A, B> fromA;
     private final Function<B, A> fromB;
 
@@ -32,4 +32,8 @@ public class BaseEntityConvert<A, B> {
         return entitys.stream().map(this::convertFromB).collect(Collectors.toList());
     }
 
+    @Override
+    public A fill(B[] entitys) {
+        return null;
+    }
 }
