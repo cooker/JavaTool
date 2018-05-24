@@ -1,4 +1,4 @@
-package com.cooker.zoom.helper.utils.extend;
+package com.cooker.zoom.helper.utils.base;
 
 import org.apache.commons.io.IOUtils;
 

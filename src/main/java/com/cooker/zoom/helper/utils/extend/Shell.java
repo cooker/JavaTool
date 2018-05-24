@@ -5,7 +5,7 @@ import org.apache.commons.logging.Log;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import static com.cooker.zoom.helper.utils.extend.EIOUtils.destroy;
+import static com.cooker.zoom.helper.utils.base.EIOUtils.destroy;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.commons.io.IOUtils.toBufferedReader;
 

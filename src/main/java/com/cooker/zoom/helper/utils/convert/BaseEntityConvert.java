@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class BaseEntityConvert<A, B> implements IEntityPackage<A, B> {
+public class BaseEntityConvert<A, B> implements IEntityConvert<A, B> {
     private final Function<A, B> fromA;
     private final Function<B, A> fromB;
 
@@ -33,7 +33,7 @@ public class BaseEntityConvert<A, B> implements IEntityPackage<A, B> {
     }
 
     @Override
-    public A fill(B[] entitys) {
+    public A fill(B... entitys) {
         return null;
     }
 }
