@@ -5,7 +5,7 @@ import com.cooker.zoom.helper.utils.base.quantity.Data;
 /**
  * Created by yu.kequn on 2018-05-24.
  */
-public interface IFileSizeUtils {
+public interface IFileVolume {
     static String sizeFormat(long size){
         if(size / Data.TB.multiplier() >= 1){//如果当前Byte的值大于等于1TB
             return String.format("%.2f", size/(float)Data.TB.multiplier()) + "TB";//将其转换成TB

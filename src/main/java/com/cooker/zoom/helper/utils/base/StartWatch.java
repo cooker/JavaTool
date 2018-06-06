@@ -27,9 +27,17 @@
 
 package com.cooker.zoom.helper.utils.base;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.StopWatch;
 
+import java.util.Date;
+
 public class StartWatch extends StopWatch {
+  private String action = "监控";
+  public StartWatch(String action){
+    super();
+    this.action = action;
+  }
   public StartWatch() {
     super();
   }
@@ -46,6 +54,19 @@ public class StartWatch extends StopWatch {
       super.resume();
     }
   }
-
+  ;
   private boolean _started = false;
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    return sb.append("-----------------------------------------\n")
+             .append("Action：").append(action).append("\n")
+             .append("-----------------------------------------\n")
+             .append("启动时间：").append(
+                    DateFormatUtils.format(new Date(this.getStartTime()), "yyyy-MM-dd HH:mm:ss:SSS")
+             ).append("\n")
+             .append("耗时：").append(this.getTime()).append("ms \n")
+             .toString();
+  }
 }
