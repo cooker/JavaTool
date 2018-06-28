@@ -6,7 +6,7 @@ import java.io.File;
  * Created by yu.kequn on 2018-05-24.
  * 顶级文件工具
  */
-public class TopFileUtils implements IFileSizeUtils{
+public class FileOperateUtils implements IFileVolume {
     public static boolean forceDeletePath(File path) {
         if (path == null) {
             return false;

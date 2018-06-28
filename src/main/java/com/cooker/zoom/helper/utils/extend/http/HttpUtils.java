@@ -45,7 +45,6 @@ public class HttpUtils {
         String result = HttpResponseMsg.FAIL.toString();
 
         try (CloseableHttpClient client = HttpClients.createDefault()){
-
             String nurl = StringUtils.trimToNull(url);
             String uparams = helper.newGetParams(params);
             StringBuilder sb = new StringBuilder(nurl);

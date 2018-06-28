@@ -1,0 +1,3 @@
+verifier com.cooker.zoom.helper.utils.extend.args.constraints.NotEmpty com.cooker.zoom.helper.utils.extend.args.constraints.NotEmptyStringVerifier
+verifier com.cooker.zoom.helper.utils.extend.args.constraints.NotNull com.cooker.zoom.helper.utils.extend.args.constraints.NotNullVerifier
+verifier com.cooker.zoom.helper.utils.extend.args.constraints.StringLength com.cooker.zoom.helper.utils.extend.args.constraints.StringLengthVerifier
