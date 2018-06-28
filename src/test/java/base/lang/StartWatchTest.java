@@ -8,8 +8,11 @@ import org.apache.commons.lang3.ThreadUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.nio.file.*;
 import java.util.Collection;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by yu.kequn on 2018-05-24.
@@ -88,6 +91,22 @@ public class StartWatchTest {
 
         public void setId(String id) {
             this.id = id;
+        }
+    }
+
+    @Test
+    public void wathPath() throws IOException, InterruptedException {
+        WatchService watchService = FileSystems.getDefault().newWatchService();
+        Path path = Paths.get("d:/");
+        path.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
+        WatchKey watchKey = watchService.poll(3, TimeUnit.SECONDS);
+        for(;;){
+            watchKey = watchService.take();
+            watchKey.pollEvents().stream().forEach(e->{
+                System.out.println(e.context());
+                System.out.println(e.kind().name());
+            });
+            watchKey.reset();
         }
     }
 }

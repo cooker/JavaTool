@@ -1,0 +1,80 @@
+#!/bin/bash
+
+#add service
+# chkconfig --add xxx
+
+#open and start
+#chkconfig --level 35 xxx on  
+
+#description: agent is the itsm base thing
+
+export SERVICE_HOME=/usr/local/apollo/ITBus-client
+
+export PIDFILE_PATH=/usr/local/apollo/ITBus-client/pid.pid
+
+export SERVICE_OWNER="root"
+
+case "$1" in
+
+start)
+
+	echo -n "starting service"
+	if [ -e "$PIDFILE_PATH" ];then
+		echo "pid file is ok"
+	else
+		touch $PIDFILE_PATH
+	fi
+
+	su - $SERVICE_OWNER -c "$SERVICE_HOME/service.sh &"
+
+	echo " OK "
+
+;;
+
+stop)
+
+	echo -n "shutdown service:"
+	pid=$(cat $PIDFILE_PATH)
+	if  [ ! -n "$pid" ] ;then
+	   echo "service already shutdown"
+	else
+	   echo "service stopping"
+	   kill -9 $pid
+	   echo "" > $PIDFILE_PATH
+	fi
+	
+	echo "OK"
+
+;;
+
+status)
+
+	echo -n "shutdown service:"
+
+	pid=$(cat $PIDFILE_PATH)
+
+	if  [ ! -n "$pid" ] ;then
+	   echo "service already shutdown"
+	else
+	   echo "service is running pid:$pid"
+	fi
+
+;;
+
+reload|restart)
+
+	$0 stop
+
+	$0 start
+
+;;
+
+*)
+
+echo "Usage: `basename $0` start|stop|restart"
+
+exit 1
+
+esac
+
+exit 0
