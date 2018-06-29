@@ -14,32 +14,47 @@
 // limitations under the License.
 // =================================================================================================
 
-package com.cooker.zoom.helper.utils.base.quantity;
+package com.cooker.zoom.helper.utils.base.units;
 
-public enum Data implements Unit<Data> {
-  BITS(1),
-  Kb(1024, BITS),
-  Mb(1024, Kb),
-  Gb(1024, Mb),
-  BYTES(8, BITS),
-  KB(1024, BYTES),
-  MB(1024, KB),
-  GB(1024, MB),
-  TB(1024, GB),
-  PB(1024, TB);
+import java.util.concurrent.TimeUnit;
+
+public enum Time implements Unit<Time> {
+  NANOSECONDS(1, TimeUnit.NANOSECONDS, "ns"),
+  MICROSECONDS(1000, NANOSECONDS, TimeUnit.MICROSECONDS, "us"),
+  MILLISECONDS(1000, MICROSECONDS, TimeUnit.MILLISECONDS, "ms"),
+  SECONDS(1000, MILLISECONDS, TimeUnit.SECONDS, "secs"),
+  MINUTES(60, SECONDS, TimeUnit.MINUTES, "mins"),
+  HOURS(60, MINUTES, TimeUnit.HOURS, "hrs"),
+  DAYS(24, HOURS, TimeUnit.DAYS, "days");
 
   private final double multiplier;
+  private final TimeUnit timeUnit;
+  private final String display;
 
-  private Data(double multiplier) {
+  private Time(double multiplier, TimeUnit timeUnit, String display) {
     this.multiplier = multiplier;
+    this.timeUnit = timeUnit;
+    this.display = display;
   }
 
-  private Data(double multiplier, Data base) {
-    this(multiplier * base.multiplier);
+  private Time(double multiplier, Time base, TimeUnit timeUnit, String display) {
+    this(multiplier * base.multiplier, timeUnit, display);
   }
 
   @Override
   public double multiplier() {
     return multiplier;
+  }
+
+  /**
+   * Returns the equivalent {@code TimeUnit}.
+   */
+  public TimeUnit getTimeUnit() {
+    return timeUnit;
+  }
+
+  @Override
+  public String toString() {
+    return display;
   }
 }

@@ -14,7 +14,7 @@
 // limitations under the License.
 // =================================================================================================
 
-package com.cooker.zoom.helper.utils.base.quantity;
+package com.cooker.zoom.helper.utils.base.units;
 
 /**
  * Represents a unit hierarchy for a given unit of measure; eg: time.  Instances represent specific

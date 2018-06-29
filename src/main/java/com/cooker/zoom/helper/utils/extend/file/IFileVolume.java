@@ -1,6 +1,6 @@
 package com.cooker.zoom.helper.utils.extend.file;
 
-import com.cooker.zoom.helper.utils.base.quantity.Data;
+import com.cooker.zoom.helper.utils.base.units.Data;
 
 /**
  * Created by yu.kequn on 2018-05-24.
