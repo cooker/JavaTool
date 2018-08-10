@@ -20,9 +20,14 @@ import org.apache.http.protocol.HTTP;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by yu.kequn on 2017/8/10.
@@ -122,6 +127,34 @@ public class HttpUtils {
             throw new IOException("HTTP IO Exception", e);
         }
         return result;
+    }
+
+    /**
+     * http下载
+     */
+    public static Optional<ByteArrayInputStream> httpDownload(String httpUrl) {
+        // 下载网络文件
+        try {
+            URL url = new URL(httpUrl);
+            ByteArrayOutputStream out;
+            try (InputStream inStream = url.openStream()) {
+                if (inStream.available() < 3000) {
+                    return null;
+                }
+                out = new ByteArrayOutputStream();
+                byte[] buffer = new byte[1204];
+                int read = 0;
+                while ((read = inStream.read(buffer)) != -1) {
+                    out.write(buffer, 0, read);
+                }
+            }
+            byte[] in_b = out.toByteArray();
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(in_b);
+            return Optional.ofNullable(inputStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 
 }
